@@ -28,6 +28,14 @@ pipeline {
                 sh 'mvn test'
             }
         }
+          stage('SonarQube Analysis') {
+            steps {
+                withSonarQubeEnv('MySonarQube') {
+                    sh 'mvn sonar:sonar -Dsonar.projectKey=student-management -Dsonar.projectName=StudentManagement -Dsonar.host.url=http://localhost:9000'
+                }
+            }
+        }
+
 
         stage('Package') {
             steps {
