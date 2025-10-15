@@ -7,7 +7,8 @@ pipeline {
         PATH = "${M2_HOME}/bin:${JAVA_HOME}/bin:/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin"
         DOCKER_REGISTRY = "azizhmz"
         DOCKER_IMAGE = "student-managementV2 "
-        KUBECONFIG = "/var/lib/jenkins/.kube/config" 
+        KUBECONFIG = "/var/lib/jenkins/.kube/config"
+	SONAR_TOKEN = credentials('sonartoken') 
     }
 
     stages {
