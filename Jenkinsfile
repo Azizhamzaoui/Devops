@@ -6,7 +6,7 @@ pipeline {
         M2_HOME = "/opt/apache-maven-3.6.3"
         PATH = "${M2_HOME}/bin:${JAVA_HOME}/bin:/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin"
         DOCKER_REGISTRY = "azizhmz"
-        DOCKER_IMAGE = "student-managementV2 "
+        DOCKER_IMAGE = "student-managementV2"
 	DOCKER_TAG      = "latest"
         KUBECONFIG = "/var/lib/jenkins/.kube/config"
 	SONAR_TOKEN = credentials('sonartoken') 
@@ -51,11 +51,13 @@ pipeline {
         }
 
         stage('Build Docker Image') {
-            steps {
-                echo '🐳 Building Docker image...'
-                sh "docker build -t ${DOCKER_REGISTRY}/${DOCKER_IMAGE}:${DOCKER_TAG} ."
-            }
-        }
+	    steps {
+   	        echo '🐳 Building Docker image...'
+    		sh 'echo "IMAGE=${DOCKER_REGISTRY}/${DOCKER_IMAGE}:${DOCKER_TAG}"'
+	        sh "docker build -t ${DOCKER_REGISTRY}/${DOCKER_IMAGE}:${DOCKER_TAG} ."
+ 		 }
+		}
+
 
         stage('Push Docker Image') {
             steps {
